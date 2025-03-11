@@ -77,7 +77,7 @@ func TestDeleteAcccount(t *testing.T) {
 }
 
 func TestListAccount(t *testing.T) {
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 10; i++ {
 		CreateRandomAccount(t)
 	}
 

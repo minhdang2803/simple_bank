@@ -19,7 +19,7 @@ jobs:
       # Label used to access the service container
       postgres:
         # Docker Hub image
-        image: postgres:14-alpine
+        image: postgres:17
         # Provide the password for postgres
         env:
           POSTGRES_USER: root
@@ -44,6 +44,6 @@ jobs:
 
     - name: Run migration
       uses: make migrate_up
-      
+
     - name: Test
       run: make test

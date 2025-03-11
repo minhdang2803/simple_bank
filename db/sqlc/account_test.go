@@ -3,10 +3,10 @@ package db
 import (
 	"context"
 	"database/sql"
-	"github.com/minhdang2803/simple_bank/utils"
 	"testing"
 	"time"
 
+	"github.com/minhdang2803/simple_bank/utils"
 	"github.com/stretchr/testify/require"
 )
 
@@ -83,7 +83,7 @@ func TestListAccount(t *testing.T) {
 
 	arg := ListAccountsParams{
 		Limit:  5,
-		Offset: 5,
+		Offset: 0,
 	}
 	accounts, err := testQueries.ListAccounts(context.Background(), arg)
 	require.NoError(t, err)

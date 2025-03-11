@@ -11,7 +11,6 @@ func TestTransferTx(t *testing.T) {
 	store := NewStore(testDB)
 	account1 := CreateRandomAccount(t)
 	account2 := CreateRandomAccount(t)
-
 	//Fake fake balance
 	amount := int64(10)
 

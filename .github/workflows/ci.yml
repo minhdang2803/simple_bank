@@ -50,6 +50,7 @@ jobs:
         sudo mv migrate /usr/bin/migrate
         which migrate
         pwd
+        ls -l
 
     - name: Run migration
       run: make migrate_up

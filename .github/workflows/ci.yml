@@ -56,5 +56,6 @@ jobs:
 
     - name: Test
       run: |
+        go mod init github.com/minhdang2803/simple_bank
         go mod tidy
         make test

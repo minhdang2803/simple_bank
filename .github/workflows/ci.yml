@@ -54,4 +54,6 @@ jobs:
       run: make migrate_up
 
     - name: Test
-      run: make test
+      run: |
+        pwd
+        make test

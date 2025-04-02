@@ -2,15 +2,17 @@ package api
 
 import (
 	"database/sql"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/lib/pq"
 	db "github.com/minhdang2803/simple_bank/db/sqlc"
 )
 
 type CreateAccountRequest struct {
 	Owner    string `json:"owner" binding:"required"`
-	Currency string `json:"currency" binding:"required,oneof=USD EUR"`
+	Currency string `json:"currency" binding:"required,currency"`
 }
 
 func (server *Server) CreateAccount(ctx *gin.Context) {
@@ -27,6 +29,9 @@ func (server *Server) CreateAccount(ctx *gin.Context) {
 
 	account, err := server.store.CreateAccount(ctx, arg)
 	if err != nil {
+		if pqError, ok := err.(*pq.Error); ok {
+			log.Print(pqError, pqError.Code.Name())
+		}
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}
@@ -73,6 +78,10 @@ func (server *Server) ListAccount(ctx *gin.Context) {
 		Offset: request.PageID,
 	})
 	if err != nil {
+		if err == sql.ErrNoRows {
+			ctx.JSON(http.StatusNotFound, errorResponse(err))
+			return
+		}
 		ctx.JSON(http.StatusInternalServerError, errorResponse(err))
 		return
 	}

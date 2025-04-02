@@ -14,7 +14,9 @@ sql:
       options:
         package: "db"
         emit_json_tags: true
+        emit_db_tags: true
         emit_empty_slices: true
+        emit_interface: true
         sql_package: "database/sql"
   # wasm:
     

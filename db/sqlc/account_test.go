@@ -11,8 +11,9 @@ import (
 )
 
 func CreateRandomAccount(t *testing.T) Account {
+	user, _ := CreateRandomUser()
 	arg := CreateAccountParams{
-		Owner:    utils.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  utils.RandomMoney(),
 		Currency: utils.RandomCurrency(),
 	}
@@ -47,7 +48,7 @@ func TestDeleteAccount(t *testing.T) {
 
 }
 
-func TestUpdateAccount(t *testing.T) {
+func TestAccount(t *testing.T) {
 	account1 := CreateRandomAccount(t)
 
 	arg := UpadateAccountParams{

@@ -17,8 +17,8 @@ RETURNING id, owner, balance, currency, created_at
 `
 
 type AddAccountBalanceParams struct {
-	Amount int64 `json:"amount"`
-	ID     int64 `json:"id"`
+	Amount int64 `db:"amount" json:"amount"`
+	ID     int64 `db:"id" json:"id"`
 }
 
 func (q *Queries) AddAccountBalance(ctx context.Context, arg AddAccountBalanceParams) (Account, error) {
@@ -46,9 +46,9 @@ RETURNING id, owner, balance, currency, created_at
 `
 
 type CreateAccountParams struct {
-	Owner    string `json:"owner"`
-	Balance  int64  `json:"balance"`
-	Currency string `json:"currency"`
+	Owner    string `db:"owner" json:"owner"`
+	Balance  int64  `db:"balance" json:"balance"`
+	Currency string `db:"currency" json:"currency"`
 }
 
 func (q *Queries) CreateAccount(ctx context.Context, arg CreateAccountParams) (Account, error) {
@@ -118,8 +118,8 @@ OFFSET $2
 `
 
 type ListAccountsParams struct {
-	Limit  int32 `json:"limit"`
-	Offset int32 `json:"offset"`
+	Limit  int32 `db:"limit" json:"limit"`
+	Offset int32 `db:"offset" json:"offset"`
 }
 
 func (q *Queries) ListAccounts(ctx context.Context, arg ListAccountsParams) ([]Account, error) {
@@ -159,8 +159,8 @@ RETURNING id, owner, balance, currency, created_at
 `
 
 type UpadateAccountParams struct {
-	ID      int64 `json:"id"`
-	Balance int64 `json:"balance"`
+	ID      int64 `db:"id" json:"id"`
+	Balance int64 `db:"balance" json:"balance"`
 }
 
 func (q *Queries) UpadateAccount(ctx context.Context, arg UpadateAccountParams) (Account, error) {

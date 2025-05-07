@@ -11,7 +11,6 @@ func TestTransferTx(t *testing.T) {
 	store := NewStore(testDB)
 	account1 := CreateRandomAccount(t)
 	account2 := CreateRandomAccount(t)
-
 	//Fake fake balance
 	amount := int64(10)
 
@@ -23,7 +22,7 @@ func TestTransferTx(t *testing.T) {
 
 	for i := 0; i < numberOfTransaction; i++ {
 		go func() {
-			result, err := store.transferTx(context.Background(), TransferTxParams{
+			result, err := store.TransferTx(context.Background(), TransferTxParams{
 				FromAccountID: account1.ID,
 				ToAccountID:   account2.ID,
 				Amount:        amount,
@@ -125,7 +124,7 @@ func TestTransferTxDeadlock(t *testing.T) {
 			toAccountID = account1.ID
 		}
 		go func() {
-			_, err := store.transferTx(context.Background(), TransferTxParams{
+			_, err := store.TransferTx(context.Background(), TransferTxParams{
 				FromAccountID: fromAccountID,
 				ToAccountID:   toAccountID,
 				Amount:        amount,

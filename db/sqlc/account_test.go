@@ -3,16 +3,17 @@ package db
 import (
 	"context"
 	"database/sql"
-	"simple_bank/utils"
 	"testing"
 	"time"
 
+	"github.com/minhdang2803/simple_bank/utils"
 	"github.com/stretchr/testify/require"
 )
 
 func CreateRandomAccount(t *testing.T) Account {
+	user, _ := CreateRandomUser()
 	arg := CreateAccountParams{
-		Owner:    utils.RandomOwner(),
+		Owner:    user.Username,
 		Balance:  utils.RandomMoney(),
 		Currency: utils.RandomCurrency(),
 	}
@@ -47,7 +48,7 @@ func TestDeleteAccount(t *testing.T) {
 
 }
 
-func TestUpdateAccount(t *testing.T) {
+func TestAccount(t *testing.T) {
 	account1 := CreateRandomAccount(t)
 
 	arg := UpadateAccountParams{
@@ -77,13 +78,13 @@ func TestDeleteAcccount(t *testing.T) {
 }
 
 func TestListAccount(t *testing.T) {
-	for i := 0; i < 1; i++ {
+	for i := 0; i < 10; i++ {
 		CreateRandomAccount(t)
 	}
 
 	arg := ListAccountsParams{
 		Limit:  5,
-		Offset: 5,
+		Offset: 0,
 	}
 	accounts, err := testQueries.ListAccounts(context.Background(), arg)
 	require.NoError(t, err)

@@ -2,7 +2,6 @@ package api
 
 import (
 	"fmt"
-
 	"github.com/go-playground/validator/v10"
 	"github.com/minhdang2803/simple_bank/utils"
 )
